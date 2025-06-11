@@ -1,8 +1,17 @@
 <div class="max-w-md mx-auto p-7 bg-gray-50 rounded-xl shadow-lg mt-12">
-  <img src="assets/images/logo.jpg" alt="Logo" />
-  <h2 class="text-3xl font-extrabold mb-7 text-center text-gray-900">
+  
+  <figure class="relative w-full h-48 mb-8">
+  <img
+    src="assets/images/logo.jpg"
+    class="h-55 w-96 object-cover rounded-lg"
+    alt="Logo"
+  />
+</figure>
+
+<h2  class="mt-13 text-3xl font-extrabold mb-7 text-center text-gray-900">
     Coordina tu Envío
   </h2>
+
 
   <form #pedidoForm="ngForm" (ngSubmit)="enviarPorWhatsApp()" class="space-y-5">
     <!-- Nombre -->
@@ -97,17 +106,14 @@
         name="tipoDeFlete"
         required
         class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
-        #controlTipoTranslado = "ngModel"
+        #controlTipoTranslado="ngModel"
       >
-
-      
-
         @for (flete of tiposDeFlete; track flete) {
         <option [value]="flete">{{ flete }}</option>
         }
       </select>
-      @if (controlTipoTranslado.getError("required") && (controlTipoTranslado.dirty ||
-      controlTipoTranslado.touched)) {
+      @if (controlTipoTranslado.getError("required") &&
+      (controlTipoTranslado.dirty || controlTipoTranslado.touched)) {
       <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
       }
     </div>
@@ -123,7 +129,7 @@
         [(ngModel)]="viviendaSeleccionada"
         name="tipoDeVivienda"
         required
-        #controlTipoVivienda = "ngModel"
+        #controlTipoVivienda="ngModel"
         class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
       >
         @for (vivienda of tipoDeVivienda; track vivienda) {
@@ -135,7 +141,6 @@
       controlTipoVivienda.touched)) {
       <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
       }
-
     </div>
 
     <!-- Elementos a trasladar -->
