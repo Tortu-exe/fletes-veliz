@@ -1,0 +1,203 @@
+<div class="max-w-md mx-auto p-7 bg-gray-50 rounded-xl shadow-lg mt-12">
+  <h2 class="text-3xl font-extrabold mb-7 text-center text-gray-900">Coordina tu Envío</h2>
+  <!-- <img src="../../assets/logo.jpg"> -->
+
+  <form #pedidoForm="ngForm" (ngSubmit)="enviarPorWhatsApp()" class="space-y-5">
+
+
+    <!-- Nombre -->
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="nombre">Nombre Completo</label>
+      <input
+        id="nombre"
+        type="text"
+        [(ngModel)]="nombre"
+        name="nombre"
+        required
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+        placeholder="Ingresa tu nombre"
+        #controlNombre="ngModel"
+        >
+        @if (controlNombre.getError("required") && (controlNombre.dirty || controlNombre.touched)) {
+            <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
+        }
+    </div>
+
+
+    <!-- Punto de Origen -->
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="origen">Punto de Origen</label>
+      <input
+        id="origen"
+        type="text"
+        [(ngModel)]="origen"
+        name="origen"
+        required
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+        placeholder="Dirección o punto de partida"
+        #controlOrigen="ngModel"
+        >
+        @if (controlOrigen.getError("required") && (controlOrigen.dirty || controlOrigen.touched)) {
+            <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
+        }
+    </div>
+
+
+    <!-- Necesita ayudantes? -->
+<div class="flex items-center space-x-2">
+  <input
+    id="ayudantes"
+    type="checkbox"
+    [(ngModel)]="ayudantes"
+    name="ayudantes"
+    class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2 transition"
+  >
+  <label for="ayudantes" class="text-sm font-medium text-gray-700">
+    ¿Necesita ayudantes?
+  </label>
+</div>
+
+
+    <!-- Punto de Destino -->
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="destino">Punto de Destino</label>
+      <input
+        id="destino"
+        type="text"
+        [(ngModel)]="destino"
+        name="destino"
+        required
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+        placeholder="Dirección o punto de llegada"
+        #controlDestino="ngModel"
+        >
+        @if (controlDestino.getError("required") && (controlDestino.dirty || controlDestino.touched)) {
+            <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
+        }
+    </div>
+
+    <!-- Tipo de Translado -->
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="horario">Tipo de Translado</label>
+      <select
+        id="flete"
+        [(ngModel)]="fleteSeleccionado"
+        name="tiposDeFlete"
+        required
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200">
+        @for (flete of tiposDeFlete; track flete) {
+            <option [value]="flete">{{ flete }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Tipo de Vivienda -->
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="horario">Tipo de Vivienda</label>
+      <select
+        id="vivienda"
+        [(ngModel)]="viviendaSeleccionada"
+        name="tiposDeFlete"
+        required
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200">
+        @for (vivienda of tipoDeVivienda; track vivienda) {
+            <option [value]="vivienda">{{ vivienda }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Elementos a trasladar -->
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="elementos">Elementos a trasladar</label>
+      <textarea
+        id="elementos"
+        [(ngModel)]="elementosATransladar"
+        name="elementosATransladar"
+        required
+        rows="4"
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200 resize-y"
+        placeholder="Ej: Sofá, 2 cajas grandes, mesa de centro."
+        #controlElementos="ngModel"
+        ></textarea>
+        @if (controlElementos.getError("required") && (controlElementos.dirty || controlElementos.touched)) {
+            <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
+        }
+    </div>
+
+
+    <!-- Fecha  -->
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="fecha">Fecha del Traslado</label>
+      <input
+        id="fecha"
+        type="date"
+        [(ngModel)]="fecha"
+        name="fecha"
+        required
+        [min]="fechaMinima"
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+        #controlFecha="ngModel">
+
+        @if (controlFecha.getError("required") && (controlFecha.dirty || controlFecha.touched)) {
+            <div class="text-sm text-red-600 mt-1">La fecha es requerida</div>
+        } @else if (controlFecha.getError("min") && (controlFecha.dirty || controlFecha.touched)) {
+            <div class="text-sm text-red-600 mt-1">La fecha mínima es {{ fechaMinima }}</div>
+        }
+    </div>
+
+    <!-- Horario -->
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="horario">Horario Preferido</label>
+      <select
+        id="horario"
+        [(ngModel)]="horarioSeleccionado"
+        name="horarioSeleccionado"
+        required
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200">
+        @for (horario of horariosDelDia; track horario) {
+            <option [value]="horario">{{ horario }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Método de pago -->
+
+    <div>
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="metodoPago">Método de Pago</label>
+      <select
+        id="metodoPago"
+        [(ngModel)]="metodoPagoSeleccionado"
+        name="metodoPagoSeleccionado"
+        required
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200">
+        @for (metodoPago of metodosPago; track metodoPago) {
+            <option [value]="metodoPago" >{{ metodoPago }}</option>
+        }
+      </select>
+    </div>
+
+    <!-- Botón para enviar por WhatsApp    -->
+
+    <div class="text-center pt-5">
+      
+      <button
+        type="submit"
+        (click)="enviarPorWhatsApp()"
+        [disabled]="!pedidoForm.valid"
+        class="w-full bg-green-600 text-white font-semibold py-3.5 px-6 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105">
+        
+        
+        Enviar Solicitud por WhatsApp
+        
+      </button>
+    </div>
+  </form>
+</div>
