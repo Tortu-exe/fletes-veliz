@@ -58,19 +58,7 @@
       }
     </div>
 
-    <!-- Necesita ayudantes? -->
-    <div class="flex items-center space-x-2">
-      <input
-        id="ayudantes"
-        type="checkbox"
-        [(ngModel)]="ayudantes"
-        name="ayudantes"
-        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2 transition"
-      />
-      <label for="ayudantes" class="text-sm font-medium text-gray-700">
-        ¿Necesita ayudantes?
-      </label>
-    </div>
+
 
     <!-- Punto de Destino -->
 
@@ -233,6 +221,20 @@
         <option [value]="metodoPago">{{ metodoPago }}</option>
         }
       </select>
+    </div>
+    
+    <!-- Necesita ayudantes? -->
+    <div class="flex items-center space-x-2">
+      <input
+        id="ayudantes"
+        type="checkbox"
+        [(ngModel)]="ayudantes"
+        name="ayudantes"
+        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2 transition"
+      />
+      <label for="ayudantes" class="text-sm font-medium text-gray-700">
+        ¿Necesita ayudantes?
+      </label>
     </div>
 
     <!-- Botón para enviar por WhatsApp    -->
