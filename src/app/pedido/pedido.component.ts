@@ -12,7 +12,13 @@ export class PedidoComponent implements OnInit {
   //Variables
   nombre: string = '';
   origen: string = '';
+  origenAltura: number = 0;
+  origenBarrio: string = '';
+
   destino: string = '';
+  destinoAltura: number = 0;
+  destinoBarrio: string = '';
+
   elementosATransladar: string = '';
   fecha: string = '';
   horariosDelDia: string[] = [
@@ -23,21 +29,20 @@ export class PedidoComponent implements OnInit {
     'Durante la noche',
   ];
   metodosPago: string[] = ['Efectivo', 'Transferencia'];
-  tiposDeFlete: string[] = ["Flete", "Mudanza"];
-  tipoDeVivienda:string [] = ["Casa", "Departamento"];
-  ayudantes : boolean = false;
+  tiposDeFlete: string[] = ['Flete', 'Mudanza'];
+  //tipoDeVivienda: string[] = ['Casa', 'Departamento'];
+  ayudantes: boolean = false;
 
-  viviendaSeleccionada :string = '';
+  //viviendaSeleccionada: string = '';
   horarioSeleccionado: string = '';
   metodoPagoSeleccionado: string = '';
   mensaje: string = '';
-  fleteSeleccionado :string = '';
+  fleteSeleccionado: string = '';
   fechaMinima: string = '';
   fechaSeparada: string[] = [];
 
   //Métodos
   ngOnInit() {
-    
     const hoy = new Date();
     this.fechaMinima = hoy.toISOString().split('T')[0]; // Formato: yyyy-mm-dd
   }
@@ -45,9 +50,28 @@ export class PedidoComponent implements OnInit {
   enviarPorWhatsApp() {
     this.fechaSeparada = this.fecha.split('-');
 
-    this.mensaje = `¡Hola! Mi nombre es ${this.nombre}.\nMe gustaría cotizar un flete desde ${this.origen} hasta ${this.destino} para trasladar ${this.elementosATransladar}. Lo necesito para el día ${this.fechaSeparada[2]}-${this.fechaSeparada[1]}-${this.fechaSeparada[0]}.\nEl tipo de translado será ${this.fleteSeleccionado}, y el tipo de vivienda es ${this.viviendaSeleccionada}.\nPrefiero que la entrega sea ${this.horarioSeleccionado}.\nEl pago lo realizaré en ${this.metodoPagoSeleccionado}.`;
-    if(this.ayudantes){
-      this.mensaje += " Voy a necesitar ayuda para mover las cosas."
+    const origenCompleto = `${this.origen} ${this.origenAltura}, ${this.origenBarrio}`;
+    const destinoCompleto = `${this.destino} ${this.destinoAltura}, ${this.destinoBarrio}`;
+
+    const origenEncoded = encodeURIComponent(origenCompleto);
+    const destinoEncoded = encodeURIComponent(destinoCompleto);
+
+    const rutaUrl = `https://www.google.com/maps/dir/${origenEncoded}/${destinoEncoded}`;
+
+
+    this.mensaje = `*Nombre del Cliente:* ${this.nombre}\n
+*Lugar de Origen:* ${this.origen} ${this.origenAltura}, ${this.origenBarrio}\n
+*Lugar de Destino:* ${this.destino} ${this.destinoAltura}, ${this.destinoBarrio}\n
+*Tipo de Traslado:* ${this.fleteSeleccionado}\n
+*¿Qué desea trasladar?:* ${this.elementosATransladar}\n
+*Lo necesito para el día:* ${this.fechaSeparada[2]}-${this.fechaSeparada[1]}, ${this.fechaSeparada[0]}\n
+*Horario:* ${this.horarioSeleccionado}\n
+*Método de Pago:* ${this.metodoPagoSeleccionado}\n
+*Posible Ruta:*
+${rutaUrl}`;
+
+    if (this.ayudantes) {
+      this.mensaje += ' *Voy a necesitar ayuda para mover las cosas.*';
     }
     const mensajeEncoded = encodeURIComponent(this.mensaje);
     const numeroWhatsApp = '5493513856158';

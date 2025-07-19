@@ -1,17 +1,15 @@
 <div class="max-w-md mx-auto p-7 bg-gray-50 rounded-xl shadow-lg mt-12">
-  
   <figure class="relative w-full h-48 mb-8">
-  <img
-    src="assets/images/logo.jpg"
-    class="h-55 w-96 object-cover rounded-lg"
-    alt="Logo"
-  />
-</figure>
+    <img
+      src="assets/images/logo.jpg"
+      class="h-55 w-96 object-cover rounded-lg"
+      alt="Logo"
+    />
+  </figure>
 
-<h2  class="mt-13 text-3xl font-extrabold mb-7 text-center text-gray-900">
+  <h2 class="mt-13 text-3xl font-extrabold mb-7 text-center text-gray-900">
     Coordina tu Envío
   </h2>
-
 
   <form #pedidoForm="ngForm" (ngSubmit)="enviarPorWhatsApp()" class="space-y-5">
     <!-- Nombre -->
@@ -26,7 +24,7 @@
         [(ngModel)]="nombre"
         name="nombre"
         required
-        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+        class="placeholder-gray-400 w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
         placeholder="Ingresa tu nombre"
         #controlNombre="ngModel"
       />
@@ -37,48 +35,117 @@
     </div>
 
     <!-- Punto de Origen -->
-
     <div>
-      <label class="block mb-2 text-sm font-medium text-gray-700" for="origen"
-        >Punto de Origen</label
-      >
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="origen">
+        Dirección y Altura de Origen
+      </label>
+
+      <div class="flex gap-4">
+        <input
+          id="origen"
+          type="text"
+          [(ngModel)]="origen"
+          name="origen"
+          required
+          class="placeholder-gray-400 w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
+          placeholder="Calle del origen"
+          #controlOrigen="ngModel"
+        />
+
+
+        <input
+          id="origenAltura"
+          type="number"
+          [(ngModel)]="origenAltura"
+          name="origenAltura"
+          required
+          min="1"
+          max="9999"
+          class="placeholder-gray-400 w-32 border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
+          placeholder="Altura"
+          #controlAltura="ngModel"
+        />
+      </div>
+
       <input
-        id="origen"
+        id="barrio"
         type="text"
-        [(ngModel)]="origen"
-        name="origen"
-        required
-        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
-        placeholder="Dirección o punto de partida"
-        #controlOrigen="ngModel"
+        [(ngModel)]="origenBarrio"
+        name="origenBarrio"
+
+        placeholder="Barrio"
+        class="mt-3 w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
+        #controlOrigenBarrio="ngModel"
       />
+
       @if (controlOrigen.getError("required") && (controlOrigen.dirty ||
       controlOrigen.touched)) {
-      <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
+      <div class="text-sm text-red-600 mt-1">Ingrese la calle</div>
+      } @if (controlOrigenBarrio.getError("required") &&
+      (controlOrigenBarrio.dirty ||controlOrigenBarrio.touched) ) {
+      <div class="text-sm text-red-600 mt-1">Ingrese el barrio</div>
+      } @if ((controlAltura.getError("min") || controlAltura.getError("max")) &&
+      (controlAltura.touched)) {
+      <div class="text-sm text-red-600 mt-1">
+        Seleccione un número entre 1 y 9999
+      </div>
       }
     </div>
 
-
-
     <!-- Punto de Destino -->
-
     <div>
-      <label class="block mb-2 text-sm font-medium text-gray-700" for="destino"
-        >Punto de Destino</label
-      >
+      <label class="block mb-2 text-sm font-medium text-gray-700" for="destino">
+        Punto de Destino
+      </label>
+
+      <div class="flex gap-4">
+        <input
+          id="destino"
+          type="text"
+          [(ngModel)]="destino"
+          name="destino"
+          required
+          placeholder="Calle de destino"
+          class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
+          #controlDestino="ngModel"
+        />
+
+        <input
+          id="destinoAltura"
+          type="number"
+          [(ngModel)]="destinoAltura"
+          name="destinoAltura"
+          required
+          min="1"
+          max="9999"
+          placeholder="Altura"
+          class="w-32 border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
+          #controlDestinoAltura="ngModel"
+        />
+      </div>
+
       <input
-        id="destino"
+        id="barrio"
         type="text"
-        [(ngModel)]="destino"
-        name="destino"
-        required
-        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
-        placeholder="Dirección o punto de llegada"
-        #controlDestino="ngModel"
+        [(ngModel)]="destinoBarrio"
+        name="destinoBarrio"
+        placeholder="Barrio"
+        class="mt-3 w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
+        #controlDestinoBarrio="ngModel"
       />
-      @if (controlDestino.getError("required") && (controlDestino.dirty ||
-      controlDestino.touched)) {
-      <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
+
+      @if (controlDestino.getError("required") && (controlDestino.dirty
+      ||controlDestino.touched) ) {
+      <div class="text-sm text-red-600 mt-1">Ingrese la calle</div>
+      } @if (controlDestinoBarrio.getError("required") &&
+      (controlDestinoBarrio.dirty ||controlDestinoBarrio.touched) ) {
+      <div class="text-sm text-red-600 mt-1">Ingrese el barrio</div>
+      }
+      @if ((controlDestinoAltura.getError("min") ||
+      controlDestinoAltura.getError("max")) && controlDestinoAltura.touched) {
+      <div class="text-sm text-red-600 mt-1">
+        Seleccione un número entre 1 y 9999
+      </div>
       }
     </div>
 
@@ -93,7 +160,7 @@
         [(ngModel)]="fleteSeleccionado"
         name="tipoDeFlete"
         required
-        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
         #controlTipoTranslado="ngModel"
       >
         @for (flete of tiposDeFlete; track flete) {
@@ -106,7 +173,7 @@
       }
     </div>
 
-    <!-- Tipo de Vivienda -->
+    <!-- Tipo de Vivienda
 
     <div>
       <label class="block mb-2 text-sm font-medium text-gray-700" for="horario"
@@ -118,7 +185,7 @@
         name="tipoDeVivienda"
         required
         #controlTipoVivienda="ngModel"
-        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
       >
         @for (vivienda of tipoDeVivienda; track vivienda) {
         <option [value]="vivienda">{{ vivienda }}</option>
@@ -129,7 +196,8 @@
       controlTipoVivienda.touched)) {
       <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
       }
-    </div>
+    </div> -->
+
 
     <!-- Elementos a trasladar -->
 
@@ -145,7 +213,7 @@
         name="elementosATransladar"
         required
         rows="4"
-        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200 resize-y"
+        class="placeholder-gray-400 w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200 resize-y"
         placeholder="Ej: Sofá, 2 cajas grandes, mesa de centro."
         #controlElementos="ngModel"
       ></textarea>
@@ -168,7 +236,7 @@
         name="fecha"
         required
         [min]="fechaMinima"
-        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+        class="placeholder-gray-400 w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
         #controlFecha="ngModel"
       />
 
@@ -194,12 +262,17 @@
         [(ngModel)]="horarioSeleccionado"
         name="horarioSeleccionado"
         required
-        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+        #controlHorarioPreferido="ngModel"
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
       >
         @for (horario of horariosDelDia; track horario) {
         <option [value]="horario">{{ horario }}</option>
         }
       </select>
+      @if (controlHorarioPreferido.getError("required") &&
+      (controlHorarioPreferido.dirty || controlHorarioPreferido.touched)) {
+      <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
+      }
     </div>
 
     <!-- Método de pago -->
@@ -215,14 +288,20 @@
         [(ngModel)]="metodoPagoSeleccionado"
         name="metodoPagoSeleccionado"
         required
-        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent transition duration-200"
+        #controlMetodoDePago="ngModel"
+        class="w-full border border-gray-200 rounded-lg px-4 py-2.5 bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-transparent transition duration-200"
       >
         @for (metodoPago of metodosPago; track metodoPago) {
         <option [value]="metodoPago">{{ metodoPago }}</option>
         }
       </select>
+
+      @if (controlMetodoDePago.getError("required") &&
+      (controlMetodoDePago.dirty || controlMetodoDePago.touched)) {
+      <div class="text-sm text-red-600 mt-1">Este campo es requerido</div>
+      }
     </div>
-    
+
     <!-- Necesita ayudantes? -->
     <div class="flex items-center space-x-2">
       <input
@@ -230,7 +309,7 @@
         type="checkbox"
         [(ngModel)]="ayudantes"
         name="ayudantes"
-        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-purple-500 focus:ring-2 transition"
+        class="w-4 h-4 text-purple-600 bg-gray-100 border-gray-300 rounded focus:ring-red-500 focus:ring-2 transition"
       />
       <label for="ayudantes" class="text-sm font-medium text-gray-700">
         ¿Necesita ayudantes?
@@ -244,7 +323,7 @@
         type="submit"
         (click)="enviarPorWhatsApp()"
         [disabled]="!pedidoForm.valid"
-        class="w-full bg-green-600 text-white font-semibold py-3.5 px-6 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
+        class="w-full bg-green-600 text-white font-semibold py-3.5 px-6 rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-opacity-75 transition duration-300 disabled:opacity-50 disabled:cursor-not-allowed transform hover:scale-105"
       >
         Enviar Solicitud por WhatsApp
       </button>
