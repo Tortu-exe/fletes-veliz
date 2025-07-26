@@ -59,14 +59,14 @@ export class PedidoComponent implements OnInit {
     const rutaUrl = `https://www.google.com/maps/dir/${origenEncoded}/${destinoEncoded}`;
 
 
-    this.mensaje = `*Nombre del Cliente:* ${this.nombre}\n
-*Lugar de Origen:* ${this.origen} ${this.origenAltura}, ${this.origenBarrio}\n
-*Lugar de Destino:* ${this.destino} ${this.destinoAltura}, ${this.destinoBarrio}\n
-*Tipo de Traslado:* ${this.fleteSeleccionado}\n
-*¿Qué desea trasladar?:* ${this.elementosATransladar}\n
-*Lo necesito para el día:* ${this.fechaSeparada[2]}-${this.fechaSeparada[1]}, ${this.fechaSeparada[0]}\n
-*Horario:* ${this.horarioSeleccionado}\n
-*Método de Pago:* ${this.metodoPagoSeleccionado}\n
+    this.mensaje = `*Nombre del Cliente:* ${this.nombre}
+*Lugar de Origen:* ${this.origen} ${this.origenAltura}, ${this.origenBarrio}
+*Lugar de Destino:* ${this.destino} ${this.destinoAltura}, ${this.destinoBarrio}
+*Tipo de Traslado:* ${this.fleteSeleccionado}
+*¿Qué desea trasladar?:* ${this.elementosATransladar}
+*Lo necesito para el día:* ${this.fechaSeparada[2]}-${this.fechaSeparada[1]}, ${this.fechaSeparada[0]}
+*Horario:* ${this.horarioSeleccionado}
+*Método de Pago:* ${this.metodoPagoSeleccionado}
 *Posible Ruta:*
 ${rutaUrl}`;
 
